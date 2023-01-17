@@ -1,0 +1,32 @@
+- name: prompt and debug modules
+  hosts: all
+  vars_prompt:
+  - name: value_x
+    prompt: Enter value of x
+    private: false
+  - name: value_y
+    prompt: Enter value of y
+    private: false
+  - name: username
+    prompt: Enter username
+    private: false
+  - name: password
+    prompt: Enter password
+    private: true
+  tasks:
+  - name: print message
+    debug:
+      msg: Logged in as {{ username }}
+
+  - name: compare
+    debug:
+      msg:
+       - "value of x is: {{ value_x }}"
+       - "value of y is: {{ value_y }}"
+       - "value of username is: {{ username }}"
+       - "is x equal to y: {{ value_x==value_y }}"
+       - "is x not equal to y: {{ value_x != value_y }}"
+       - "is x greater than y: {{ value_x > value_y }}"
+       - "is x lesser than y: {{ value_x < value_y }}"
+       - "is x lesser than equal to y: {{ value_x <= value_y }}"
+       - "is x greater than equal to y: {{ value_x >= value_y }}"

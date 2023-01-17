@@ -1,0 +1,11 @@
+plugin: aws_ec2
+ansible_ssh_user: ubuntu
+aws_access_key: ec2.pem
+regions:
+  - us-east-2
+ansible_user: ubuntu
+filters:
+  instance-state-name : running
+  tag:Name:   
+    - Ansible-node1
+    - Ansible-node2

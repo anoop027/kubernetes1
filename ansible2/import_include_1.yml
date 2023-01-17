@@ -1,0 +1,24 @@
+- name: Include and import modules
+  hosts: aws_ec2
+  become: true
+  tasks:
+   - name: install nginx on debian 
+     apt: 
+      name: nginx 
+      state: absent
+     when: ansible_os_family=="Debian"
+   - name: install java on redhat
+     yum: 
+       name: java-1.8.0-openjdk
+       state: present
+     when: ansible_os_family=="Redhat"
+   - name: install java on ubuntu
+     apt: 
+       name: openjdk-8-jdk
+       state: absent
+     when: ansible_os_family=="Debian"
+   - name: install apache http on redhat 
+     apt: 
+      name: httpd 
+      state: present
+     when: ansible_os_family=="Redhat"

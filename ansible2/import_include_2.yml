@@ -1,0 +1,11 @@
+ - name: install multiple packages
+   hosts: aws_ec2
+   gather_facts: true
+   become: true
+   tasks:
+    - import_tasks: "Debianjava.yml"
+      when: ansible_os_family=="Debian"
+    - import_tasks: Redhatjava.yml
+      when: ansible_os_family=="Redhat"
+    - include_tasks: "{{ansible_os_family}}webserver.yml"
+    - include_tasks: "Redhatwebserver.yml" 

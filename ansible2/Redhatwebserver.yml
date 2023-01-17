@@ -1,0 +1,5 @@
+   - name: install nginx on redhat 
+     apt: 
+      name: nginx
+      state: present
+     when: ansible_os_family=="Redhat"
