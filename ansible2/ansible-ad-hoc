@@ -1,0 +1,30 @@
+ansible all -m ping
+ansible all -m shell -a uptime
+ansible all -m shell -a "touch 1.txt"
+ansible all -m shell -a "df -H"
+ansible all -m shell -a "df -H | grep /dev/xvda15"
+ansible all -m shell -a "ls -a"
+ansible nodes -m shell -a "sh 1.sh hello123"
+ansible nodes -m shell -a "rm 1.sh"
+ansible nodes -m copy -a "src=./1.txt dest=/home/ubuntu"
+ansible nodes -m copy -a "src=./1.txt dest=/home/ubuntu mode=0777"
+ansible nodes -m copy -a "src=./1.txt dest=/home/ubuntu mode=0777 owner=root" --become
+ansible nodes -m copy -a "src=./1.txt dest=/home/ubuntu mode=0777 owner=root group=root" --become
+ansible nodes -m copy -a "src=/home/ubuntu/2.txt dest=/home/ubuntu/t2 remote_src=yes"
+ansible all -m copy -a "src=/home/ubuntu/test33 dest=/home/ubuntu/"
+ansible nodes -m copy -a "src=./1.txt dest=/home/ubuntu backup=true" ---> to backup when overwriting files
+ansible nodes -m fetch -a "src=/home/ubuntu/2.txt dest=/home/ubuntu/2.txt" --> copies file inside directory with host server name/IP
+ansible nodes -m fetch -a "src=/home/ubuntu/2.txt dest=/home/ubuntu/2.txt flat=yes" --> copies only file
+ansible-doc module_name
+ansible nodes -m file -a "dest=/home/ubuntu/new mode=700 owner=ubuntu group=ubuntu state=directory"
+ansible nodes -m file -a "dest=/home/ubuntu/new mode=777 owner=root state=directory" --become
+ansible nodes -m file -a "dest=/home/ubuntu/new state=absent" --become
+ansible nodes -m file -a "dest=/home/ubuntu/1.txt mode=700 owner=ubuntu group=ubuntu"
+ansible all -m apt -a "name=adduser state=present"
+ansible all -m apt -a "name=wget state=present" --become
+ansible all -m apt -a "name=tomcat state=absent" --become
+ansible all -m apt -a "name=vim state=latest" --become
+ansible all -m setup -a "filter=ansible_distribution"
+ansible all -m setup -a "gather_subset=user_id"
+ansible all -m setup -a "filter=ansible_kernel"
+ansible aws_ec2 -i aws_ec2.yml -m ping
