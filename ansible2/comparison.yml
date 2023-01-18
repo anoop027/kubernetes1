@@ -16,14 +16,16 @@
   tasks:
   - name: print message
     debug:
-      msg: Logged in as {{ username }}
+      msg:
+       -  Logged in as {{ username }}
+       - "value of x is: {{ value_x }}"
+       - "value of y is: {{ value_y }}"
 
   - name: compare
     debug:
-      msg:
-       - "value of x is: {{ value_x }}"
-       - "value of y is: {{ value_y }}"
-       - "value of username is: {{ username }}"
+      msg: "{{ item }}"
+    when: '"True" in item'
+    loop:
        - "is x equal to y: {{ value_x==value_y }}"
        - "is x not equal to y: {{ value_x != value_y }}"
        - "is x greater than y: {{ value_x > value_y }}"
