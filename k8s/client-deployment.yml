@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+         component: web
+    spec: 
+     containers:
+       - name: client
+         image: 217747396203.dkr.ecr.ap-south-1.amazonaws.com/test_repo:client
+         ports:
+          - containerPort: 3000
